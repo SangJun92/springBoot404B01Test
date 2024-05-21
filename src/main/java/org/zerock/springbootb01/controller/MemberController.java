@@ -93,14 +93,14 @@ public class MemberController {
 //    }
 
     @GetMapping("/modify")
-    public void modifyGet(String mid, String mpw, Model model){
+    public void modifyGet(MemberJoinDTO memberJoinDTO, Model model){
         log.info("modify get......");
         model.addAttribute("mid","mpw");
     }
     @PostMapping("/modify")
-    public String modifyPost(String mid, String mpw){
+    public String modifyPost(MemberJoinDTO memberJoinDTO){
         log.info("modify Post......");
-        memberService.modify(mpw, mid);
+        memberService.modify(memberJoinDTO);
         return "redirect:/board/list";
     }
 

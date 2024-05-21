@@ -20,8 +20,14 @@ public class MemberServiceImpl implements MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void modify(String mpw, String mid) {
+    public void modify(MemberJoinDTO memberJoinDTO) {
+        String mid = memberJoinDTO.getMid();
+        String encodedPassword = passwordEncoder.encode(memberJoinDTO.getMpw());
+        String name = memberJoinDTO.getName();
+        String email = memberJoinDTO.getEmail();
+        String address = memberJoinDTO.getAddress();
 
+        memberRepository.updateMember(mid, encodedPassword, name, email, address);
     }
 
     @Override

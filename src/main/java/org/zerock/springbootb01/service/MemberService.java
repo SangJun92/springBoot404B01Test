@@ -6,7 +6,7 @@ import org.zerock.springbootb01.dto.MemberJoinDTO;
 public interface MemberService {
 
 
-    void modify(String mpw, String mid);
+    void modify(MemberJoinDTO memberJoinDTO);
 
     static class MidExistException extends Exception {
 
