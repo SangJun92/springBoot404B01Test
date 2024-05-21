@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout1.html}">
+<div id="container" layout:fragment="content">
+    <!-- location_area -->
+    <div  class="location_area customer">
+        <div class="box_inner">
+            <h2 class="tit_page">TOURIST <span class="in">in</span> TOUR</h2>
+            <p class="location">고객센터 <span class="path">/</span> 공지사항</p>
+            <ul class="page_menu clear">
+                <li><a href="#" class="on">공지사항</a></li>
+                <li><a href="#">문의하기</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- //location_area -->
+
+    <!-- bodytext_area -->
+    <div class="bodytext_area box_inner">
+        <form action="/ex/modify" method="post">
+        <ul class="bbsview_list">
+            <div class="input-group mb-3">
+                <span class="input-group-text">글 번호</span>
+                <input type="text" name="no" class="form-control" th:value="${notice.no}" readonly>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">제목</span>
+                <input type="text" name="title" class="form-control" th:value="${notice.title}">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">조회수</span>
+                <input type="text" class="form-control" th:value="${notice.count}" readonly>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">작성일</span>
+                <input type="text" class="form-control" th:value="${#temporals.format(notice.regDate,'yyyy-MM-dd HH:mm:ss')}" readonly>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">내용</span>
+                <textarea class="form-control col-sm-5" rows="5" name="content" >[[${notice.content}]]</textarea>
+            </div>
+        </ul>
+        <p class="btn_line txt_right">
+            <button type="submit" class="btn_bbs modifyBtn">수정</button>
+            <a th:href="@{/ex/notice_list}" class="btn_bbs">목록</a>
+        </p>
+        </form>
+        <ul class="near_list mt20">
+            <li><h4 class="prev">다음글</h4><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li>
+            <li><h4 class="next">이전글</h4><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a></li>
+        </ul>
+    </div>
+    <!-- //bodytext_area -->
+
+</div>
+<script layout:fragment="script" th:inline="javascript">
+    const errors = [[${errors}]]
+    console.log(errors)
+    let errorMsg = ''
+    if(errors){
+        for(let i=0; i<errors.length; i++){
+            errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
+        }
+        history.replaceState({},null,null)
+        alert(errorMsg)
+    }
+</script>
+<!-- //container -->
+</html>

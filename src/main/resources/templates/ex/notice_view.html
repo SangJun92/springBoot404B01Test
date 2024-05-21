@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout1.html}">
+<div id="container" layout:fragment="content">
+    <!-- location_area -->
+    <div  class="location_area customer">
+        <div class="box_inner">
+            <h2 class="tit_page">TOURIST <span class="in">in</span> TOUR</h2>
+            <p class="location">고객센터 <span class="path">/</span> 공지사항</p>
+            <ul class="page_menu clear">
+                <li><a href="#" class="on">공지사항</a></li>
+                <li><a href="#">문의하기</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- //location_area -->
+
+    <!-- bodytext_area -->
+    <div class="bodytext_area box_inner">
+        <ul class="bbsview_list">
+            <li class="bbs_title">[[${notice.title}]]</li>
+            <li class="bbs_hit">작성일 : <span>[[${#temporals.format(notice.regDate,'yyyy-MM-dd HH:mm:ss')}]]</span></li>
+            <li class="bbs_date">조회수 : <span>[[${notice.count}]]</span></li>
+            <li class="bbs_content">
+                <div class="editer_content" th:utext="${notice.content}">
+                </div>
+            </li>
+        </ul>
+        <p class="btn_line txt_right">
+            <a th:href="@{/ex/notice_modify(no=${notice.no})}" class="btn_bbs">수정</a>
+            <a class="btn_bbs removeBtn">삭제</a>
+            <a th:href="@{/ex/notice_list}" class="btn_bbs">목록</a>
+        </p>
+        <ul class="near_list mt20">
+            <li><h4 class="prev">다음글</h4><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li>
+            <li><h4 class="next">이전글</h4><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a></li>
+        </ul>
+    </div>
+    <form>
+        <input type="hidden" name="no" th:value="${notice.no}">
+    </form>
+    <!-- //bodytext_area -->
+
+</div>
+<script layout:fragment="script" th:inline="javascript">
+    document.querySelector(".removeBtn").addEventListener("click",function(e){
+        e.stopPropagation()
+        e.preventDefault()
+        const formObj = document.querySelector("form")
+        formObj.action="/ex/notice_remove"
+        formObj.method="post"
+        formObj.submit()
+    },false)
+</script>
+<!-- //container -->
+</html>
