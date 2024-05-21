@@ -31,6 +31,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public void remove(String mid) {
+        memberRepository.deleteById(mid);
+    }
+
+    @Override
     public void join(MemberJoinDTO memberJoinDTO) throws MidExistException {
 
         // 화면에서 가지고온 ID를 저장

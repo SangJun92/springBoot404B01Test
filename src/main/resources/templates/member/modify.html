@@ -43,7 +43,7 @@
                         </div>
                         <div class="my-4">
                             <div class="float-end">
-                                <button type ="exit" class="btn btn-danger submit">탈퇴</button>
+                                <button type ="button" class="btn btn-danger removeBtn">탈퇴</button>
                                 <button type ="submit" class="btn btn-primary submit">수정</button>
                                 <button type="reset" class="btn btn-secondary">초기화</button>
                             </div>
@@ -55,10 +55,20 @@
     </div>
 </div>
 <script layout:fragment="script" th:inline="javascript">
-    const error = [[${error}]]
-    if(error && error == 'mid'){
-        alert("동일한 MID를 가진 계정이 존재합니다.")
-    }
+
+    const formObj = document.querySelector("#registerForm")
+    document.querySelector(".removeBtn").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        formObj.action = `/member/remove`
+        formObj.method = 'post'
+        formObj.submit()
+    }, false)
+
+    // const error = [[${error}]]
+    // if(error && error == 'mid'){
+    //     alert("동일한 MID를 가진 계정이 존재합니다.")
+    // }
 
 </script>
 </html>

@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.springbootb01.domain.Member;
+import org.zerock.springbootb01.dto.BoardDTO;
 import org.zerock.springbootb01.dto.MemberJoinDTO;
 import org.zerock.springbootb01.service.MemberService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
@@ -20,7 +23,6 @@ import org.zerock.springbootb01.service.MemberService;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
-
 
 
     @GetMapping("/login")
@@ -104,8 +106,20 @@ public class MemberController {
         return "redirect:/board/list";
     }
 
+    @PostMapping("/remove")
+    public String remove(MemberJoinDTO memberJoinDTO, RedirectAttributes redirectAttributes, HttpSession session) {
+        String mid = memberJoinDTO.getMid();
+        log.info("remove post......"+mid);
+        session.invalidate();
+        memberService.remove(mid);
+
+        redirectAttributes.addFlashAttribute("result","removed");
+        return "redirect:/board/list";
+    }
+
+
 //    // 탈퇴하기
-//    @GetMapping("/exit")
+//    @PostMapping("/exit")
 //    public String exit() {
 //        User user = (User) session.getAttribute("user_info");
 //        userRepository.delete(user);

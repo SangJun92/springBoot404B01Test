@@ -8,6 +8,8 @@ public interface MemberService {
 
     void modify(MemberJoinDTO memberJoinDTO);
 
+    void remove(String mid);
+
     static class MidExistException extends Exception {
 
     }

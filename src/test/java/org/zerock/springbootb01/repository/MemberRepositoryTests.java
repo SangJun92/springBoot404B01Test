@@ -61,13 +61,13 @@ public class MemberRepositoryTests {
         member.getRoleSet().forEach(memberRole -> log.info(memberRole.name()));
     }
 
-    @Commit
-    @Test
-    public void testUpdate() {
-
-        String mid = "cookie_00@naver.com"; // 소셜로그인으로 추가된 사용자로 현재 DB에 존재하는 이메일
-        String mpw = passwordEncoder.encode("54321");
-
-        memberRepository.updatePassword(mpw, mid);
-    }
+//    @Commit
+//    @Test
+//    public void testUpdate() {
+//
+//        String mid = "cookie_00@naver.com"; // 소셜로그인으로 추가된 사용자로 현재 DB에 존재하는 이메일
+//        String mpw = passwordEncoder.encode("54321");
+//
+//        memberRepository.updatePassword(mpw, mid);
+//    }
 }

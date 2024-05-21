@@ -44,7 +44,9 @@ public class CustomUserDetailsService implements UserDetailsService {
                 new MemberSecurityDTO(
                         member.getMid(),
                         member.getMpw(),
+                        member.getName(),
                         member.getEmail(),
+                        member.getAddress(),
                         member.isDel(),
                         false,
                         member.getRoleSet()
