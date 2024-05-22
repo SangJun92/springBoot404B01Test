@@ -35,17 +35,17 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.deleteById(mid);
     }
 
-    @Override
-    public boolean checker(MemberJoinDTO memberJoinDTO) {
-        String mid = memberJoinDTO.getMid();
-        boolean exist = memberRepository.existsById(mid);
-        return exist;
-    }
-
 //    @Override
-//    public int duplicate(String mid) {
-//        return memberRepository.duplicate(mid);
+//    public boolean checker(MemberJoinDTO memberJoinDTO) {
+//        String mid = memberJoinDTO.getMid();
+//        boolean exist = memberRepository.existsById(mid);
+//        return exist;
 //    }
+
+    @Override
+    public int duplicate(String mid) {
+        return memberRepository.duplicate(mid);
+    }
 
     @Override
     public void join(MemberJoinDTO memberJoinDTO) throws MidExistException {

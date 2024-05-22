@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -93,7 +94,7 @@ public class MemberController {
 //        MemberService.modify(mpw, mid);
 //        return "redirect:/board/list";
 //    }
-
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify")
     public void modifyGet(MemberJoinDTO memberJoinDTO, Model model){
         log.info("modify get......");
@@ -138,26 +139,20 @@ public class MemberController {
 //        return "index";
 //    }
 
-//    @PostMapping("/duplicate")
-//    public int duplicate(MemberJoinDTO memberJoinDTO, RedirectAttributes redirectAttributes, HttpSession session) {
-//        String mid = memberJoinDTO.getMid();
-//        log.info("remove post……"+mid);
-//
-//        return memberService.duplicate(mid);
-//    }
 
-    @PostMapping("/checker")
-    public String checkerPOST(MemberJoinDTO memberJoinDTO, RedirectAttributes redirectAttributes) {
-        log.info("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssiu");
-        boolean exist = memberService.checker(memberJoinDTO);
-        if(exist) {
-            log.info("Yes");
-            redirectAttributes.addFlashAttribute("error", "mid");
-        } else {
-            log.info("No");
-            redirectAttributes.addFlashAttribute("suc", "mid");
-        }
-        return "redirect:/member/join";
-    }
+
+//    @PostMapping("/checker")
+//    public String checkerPOST(MemberJoinDTO memberJoinDTO, RedirectAttributes redirectAttributes) {
+//        log.info("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssiu");
+//        boolean exist = memberService.checker(memberJoinDTO);
+//        if(exist) {
+//            log.info("Yes");
+//            redirectAttributes.addFlashAttribute("error", "mid");
+//        } else {
+//            log.info("No");
+//            redirectAttributes.addFlashAttribute("suc", "mid");
+//        }
+//        return "redirect:/member/join";
+//    }
 
 }

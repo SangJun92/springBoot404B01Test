@@ -26,6 +26,6 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     @Query("update Member m set m.mpw = :mpw,  m.name = :name, m.email = :email, m.address = :address where m.mid = :mid")
     void updateMember(String mid, String mpw,  String name, String email, String address);
 
-    @Query("select count(mid) from Member where mid = :mid")
+    @Query("select count(m) from Member m where m.mid =:mid")
     int duplicate(String mid);
 }
