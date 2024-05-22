@@ -18,8 +18,8 @@
                     <form id="registerForm" action="/member/join" method="post">
                         <div class="input-group mb-3">
                             <span class="input-group-text">아이디</span>
-                            <input type="text" name="mid" class="form-control">
-                            <button type="button" id="checkId" class="btn btn-secondary">중복확인</button>
+                            <input type="text" id="mid" class="form-control">
+                            <button type="button" class="btn btn-secondary checkBtn">중복확인</button>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">비밀번호</span>
@@ -54,10 +54,49 @@
     </div>
 </div>
 <script layout:fragment="script" th:inline="javascript">
+
+    const formObj = document.querySelector("#registerForm")
+    document.querySelector(".checkBtn").addEventListener("click",function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/member/checker`
+        formObj.method = 'Post'
+        formObj.submit()
+
+    }, false)
     const error = [[${error}]]
     if (error && error == 'mid') {
         alert("동일한 MID를 가진 계정이 존재합니다.")
     }
+    const suc = [[${suc}]]
+    if (suc && suc == 'mid') {
+        alert("동일한 MID를 가진 계정이 존재안한다.")
+    }
 
 </script>
+
+
+<!--<script layout:fragment="script">-->
+<!--    const error = [[${error}]]-->
+<!--    if (error && error == 'mid') {-->
+<!--        alert("동일한 MID를 가진 계정이 존재합니다.")-->
+<!--    }-->
+
+<!--    document.getElementById('checkId').addEventListener('click', async function () {-->
+<!--        const mid = document.getElementById('mid').value;-->
+<!--        try {-->
+<!--            const response = await axios.post('/duplicate', { mid: mid });-->
+<!--            if (response.data.exists) {-->
+<!--                alert('동일한 MID를 가진 계정이 존재합니다.');-->
+<!--            } else {-->
+<!--                alert('사용 가능한 MID입니다.');-->
+<!--            }-->
+<!--        } catch (error) {-->
+<!--            console.error('Error checking ID:', error);-->
+<!--            alert('오류가 발생했습니다. 다시 시도해주세요.');-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
 </html>

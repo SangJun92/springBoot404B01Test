@@ -36,6 +36,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public boolean checker(MemberJoinDTO memberJoinDTO) {
+        String mid = memberJoinDTO.getMid();
+        boolean exist = memberRepository.existsById(mid);
+        return exist;
+    }
+
+//    @Override
+//    public int duplicate(String mid) {
+//        return memberRepository.duplicate(mid);
+//    }
+
+    @Override
     public void join(MemberJoinDTO memberJoinDTO) throws MidExistException {
 
         // 화면에서 가지고온 ID를 저장

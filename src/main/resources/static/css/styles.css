@@ -11352,3 +11352,13 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: -15rem;
   }
 }
+
+.register-btn {
+  float:right;
+  margin-left:auto;
+}
+
+.list-btn {
+  float:left;
+  margin-right:auto;
+}

@@ -11,34 +11,34 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    Board Register
+                    게시글 등록
                 </div>
                 <div class="card-body">
                     <form action="/board/register" method="post">
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Title</span>
+                            <span class="input-group-text">제목</span>
                             <input type="text" name="title" class="form-control" placeholder="Title">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Content</span>
+                            <span class="input-group-text">내용</span>
                             <textarea class="form-control col-sm-5" rows="5" name="content"></textarea>
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Writer</span>
+                            <span class="input-group-text">작성자</span>
                             <input type="text" name="writer" class="form-control" placeholder="Writer"
                                    th:value="${#authentication.principal.username}" readonly>
 
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text">Image</span>
+                            <span class="input-group-text">이미지</span>
                             <div class="float-end uploadHidden">
-                                <button type="button" class="btn btn-primary uploadFileBtn">ADD Files</button>
+                                <button type="button" class="btn btn-primary uploadFileBtn">이미지 추가</button>
                             </div>
                         </div>
                         <div class="my-4">
                             <div class="float-end">
-                                <button type="button" class="btn btn-primary submitBtn">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
+                                <button type="button" class="btn btn-primary submitBtn">등록</button>
+                                <button type="reset" class="btn btn-secondary">초기화</button>
                             </div>
                         </div>
                     </form>
@@ -59,7 +59,7 @@
                 <!--                모달창 제목 설정 부분-->
                 <div class="modal-header">
                     <!--                    제목-->
-                    <h5 class="modal-title">Upload</h5>
+                    <h5 class="modal-title">이미지 추가</h5>
                     <!--                    X버튼-->
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -72,8 +72,8 @@
                 </div>
                 <!--            footer 버튼 출력부-->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary uploadBtn">Upload</button>
-                    <button type="button" class="btn btn-outline-dark closeUploadBtn">Close</button>
+                    <button type="button" class="btn btn-primary uploadBtn">업로드</button>
+                    <button type="button" class="btn btn-outline-dark closeUploadBtn" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
@@ -95,8 +95,12 @@
         alert(errorMsg)
     }
 
+
     // 업로드 모달
     const uploadModal = new bootstrap.Modal(document.querySelector(".uploadModal"))
+    // 업로드 모달 닫기 버튼
+    // const closeUploadBtn = document.querySelector(".closeUploadBtn")
+
     // 업로드 모달창 보여주기 버튼 설정
     document.querySelector(".uploadFileBtn").addEventListener("click", function (e) {
         e.stopPropagation()
@@ -129,6 +133,10 @@
         })
     }, false)
 
+    // 모달창 안의 CLOSE : 모달창 끄기 버튼
+    // closeUploadBtn.addEventListener("click", function (e) {
+    //     closeUploadBtn.hide()
+    // }, false)
 
     function showUploadFile({uuid, fileName, link}) {
         const str = `<div class="card col-4">

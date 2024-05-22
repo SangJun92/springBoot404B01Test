@@ -138,4 +138,26 @@ public class MemberController {
 //        return "index";
 //    }
 
+//    @PostMapping("/duplicate")
+//    public int duplicate(MemberJoinDTO memberJoinDTO, RedirectAttributes redirectAttributes, HttpSession session) {
+//        String mid = memberJoinDTO.getMid();
+//        log.info("remove post……"+mid);
+//
+//        return memberService.duplicate(mid);
+//    }
+
+    @PostMapping("/checker")
+    public String checkerPOST(MemberJoinDTO memberJoinDTO, RedirectAttributes redirectAttributes) {
+        log.info("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssiu");
+        boolean exist = memberService.checker(memberJoinDTO);
+        if(exist) {
+            log.info("Yes");
+            redirectAttributes.addFlashAttribute("error", "mid");
+        } else {
+            log.info("No");
+            redirectAttributes.addFlashAttribute("suc", "mid");
+        }
+        return "redirect:/member/join";
+    }
+
 }

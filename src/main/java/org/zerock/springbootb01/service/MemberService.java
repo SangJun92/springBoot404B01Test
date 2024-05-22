@@ -10,9 +10,18 @@ public interface MemberService {
 
     void remove(String mid);
 
+//    int duplicate(String mid);
+
+    boolean checker(MemberJoinDTO memberJoinDTO);
+
+
     static class MidExistException extends Exception {
 
     }
 
     void join(MemberJoinDTO memberJoinDTO) throws MidExistException;
+
+
 }
+
+
